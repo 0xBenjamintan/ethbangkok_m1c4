@@ -1,0 +1,3 @@
+[submodule "mapmakmak/lib/forge-std"]
+	path = mapmakmak/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std.git
