@@ -10,7 +10,7 @@ interface CombinedModalProps {
 
 export default function CombinedModal({ onClose }: CombinedModalProps) {
     return (
-        <div className="fixed inset-0 flex items-center space-x-4 justify-center z-[1000] bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex flex-col sm:flex-row items-center gap-4 justify-center z-[1000] bg-black bg-opacity-50">
             <div className="w-64 h-64 flex flex-row justify-center items-center space-x-4 bg-white p-6 rounded-md shadow-lg">
                 {/* Bounty Application Section */}
                 <div className="mb-4 flex flex-col justify-center items-center">

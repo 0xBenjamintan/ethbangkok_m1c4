@@ -157,11 +157,11 @@ const MapClient = () => {
 
   return (
     <div className="relative w-full">
-      <div className="p-4 bg-gray-50 rounded-md shadow-sm mb-4 flex justify-between items-center">
-        <span>Click the marker to check the bounty details. Click Apply to apply for the selected bounty.</span>
+      <div className="p-4 bg-gray-50 rounded-md shadow-sm mb-4 flex flex-col sm:flex-row justify-between items-center">
+        <span className="text-center sm:text-left">Click the marker to check the bounty details. Click Apply to apply for the selected bounty.</span>
         <button 
           onClick={getCurrentLocation}
-          className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          className="mt-2 sm:mt-0 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
         >
           Center on My Location
         </button>
@@ -175,7 +175,7 @@ const MapClient = () => {
       
       <div 
         id="map" 
-        className="w-full h-[600px] rounded-lg shadow-md"
+        className="w-full h-[60vh] sm:h-[600px] rounded-lg shadow-md"
       />
       
       <div className="absolute bottom-5 left-5 bg-white p-3 rounded-md shadow-md z-[1000]">
