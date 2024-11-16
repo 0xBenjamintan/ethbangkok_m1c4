@@ -1,26 +1,10 @@
 "use client";
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MapPin, DollarSign, ChevronDown, ChevronUp, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
-interface Bounty {
-  id: string;
-  title: string;
-  description: string;
-  payout: number;
-  location: {
-    lat: number;
-    long: number;
-  };
-}
-
-interface BountyListProps {
-  onClose: () => void;
-}
-
+import { Card, CardContent } from '@/components/ui/card';
 import { useState, useEffect } from 'react';
+import { Badge, ChevronDown, ChevronUp, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
 
 const fetchPfpData = async () => {
   try {
@@ -40,7 +24,7 @@ const fetchPfpData = async () => {
 };
 
 const Dashboard = () => {
-<<<<<<< HEAD
+
   const [svgContent, setSvgContent] = useState('');
 
   useEffect(() => {
@@ -53,7 +37,7 @@ const Dashboard = () => {
     loadSvg();
   }, []);
 
-=======
+
   const bounties: Bounty[] = [
     {
       id: "1",
@@ -100,57 +84,18 @@ const Dashboard = () => {
     setSelectedBounty(bounty);
     setIsModalOpen(true);
   };
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784
-  return (
-    <div className="text-black px-[7%] py-[3%]">
-      <div>Submitted bounties</div>
-      {bounties.map((bounty) => (
-        <Card key={bounty.id} className="hover:shadow-lg transition-shadow">
-          <CardContent className="p-0">
-            <div
-              onClick={() => toggleBountyDetails(bounty.id)}
-              className="p-4 cursor-pointer flex items-center justify-between"
-            >
-              <div className="flex items-center space-x-4">
-                <div>
-                  <h3 className="text-lg font-semibold">{bounty.title}</h3>
-                  <Badge variant="secondary" className="mt-1">
-                    {bounty.payout} USDC
-                  </Badge>
-                </div>
-              </div>
-              {expandedBountyId === bounty.id ? (
-                <ChevronUp className="w-5 h-5 text-gray-500" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-gray-500" />
-              )}
-            </div>
 
-            {expandedBountyId === bounty.id && (
-              <div className="px-4 pb-4 pt-2 border-t">
-                <p className="text-gray-600 mb-4">{bounty.description}</p>
-                <div className="flex items-center mb-4 text-sm text-gray-500">
-                  <MapPin className="w-4 h-4 mr-1" />
-                  <span>
-                    {bounty.location.lat.toFixed(4)},{" "}
-                    {bounty.location.long.toFixed(4)}
-                  </span>
-                </div>
-                <Button onClick={() => handleApplyClick(bounty)}>Apply</Button>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      ))}
+  return (
+    <div className="text-black px-[7%] py-[5%]">
+      <div>Submitted bounties</div>
       <div>Win&apos;s bounties</div>
-<<<<<<< HEAD
+
       <div>
         {/* Render the SVG content safely */}
         {svgContent && (
           <div dangerouslySetInnerHTML={{ __html: svgContent }} />
         )}
       </div>
-=======
       {winbounties.map((bounty) => (
         <Card key={bounty.id} className="hover:shadow-lg transition-shadow">
           <CardContent className="p-0">
@@ -189,7 +134,6 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       ))}
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784
     </div>
   );
 };
