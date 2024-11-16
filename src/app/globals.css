@@ -84,3 +84,7 @@
     @apply bg-background text-foreground;
 	}
 }
+
+.font-encode {
+  font-family: 'Encode Sans', sans-serif;
+}

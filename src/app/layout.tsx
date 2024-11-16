@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-       <head>
+      <head>
         <link
           rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -27,7 +27,9 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <ThirdwebProvider>{children}</ThirdwebProvider>
+        <ThirdwebProvider>
+          <div className="font-encode bg-[#FFFBE7]">{children}</div>
+        </ThirdwebProvider>
       </body>
     </html>
   );
