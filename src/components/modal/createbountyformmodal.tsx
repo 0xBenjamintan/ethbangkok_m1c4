@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-import { useState, useEffect } from "react"
-
-import { Button } from "@/components/ui/button"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { useState, useEffect } from "react";
+import LocationSearchInput from "@/components/searchinput/page";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,6 +13,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+<<<<<<< HEAD:src/components/createbountyformmodal.tsx
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { X , CircleDollarSign} from "lucide-react"
@@ -31,6 +32,14 @@ const contract = getContract({
 });
 
 
+=======
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { X, CircleDollarSign } from "lucide-react";
+import BountyList from "./bountylist";
+import Bounty from "./bountylist";
+import { Textarea } from "@/components/ui/textarea";
+>>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
 
 const formSchema = z.object({
   walletAddress: z.string().min(2, {
@@ -47,16 +56,19 @@ const formSchema = z.object({
   }),
   location: z.string().optional(),
   photo: z.any().optional(),
-})
+});
 
 interface FormModalProps {
   onClose: () => void;
 }
 
 export function CreateBountyFormModal({ onClose }: FormModalProps) {
-  const [uploadedPhotoHash, setUploadedPhotoHash] = useState<string | null>(null);
+  const [uploadedPhotoHash, setUploadedPhotoHash] = useState<string | null>(
+    null
+  );
   const [userLocation, setUserLocation] = useState<string | null>(null);
 
+<<<<<<< HEAD:src/components/createbountyformmodal.tsx
   const { mutate: sendTransaction } = useSendTransaction();
 
   const onClick = (description: string, longitude: string, latitude: string, payoutAmount: number) => {
@@ -74,17 +86,35 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
     sendTransaction(transaction);
   };
 
+=======
+>>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
+<<<<<<< HEAD:src/components/createbountyformmodal.tsx
   
 
+=======
+  const onSubmit = async (data: any) => {
+    console.log(data); // Handle form submission
+  };
+
+  const { control, handleSubmit, setValue } = useForm();
+
+  const onLocationSelect = (lat, lng, address) => {
+    // Optionally set these values in your form state
+    console.log(lat, lng, address);
+    setValue("location", `${lat}, ${lng}`);
+  };
+>>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white w-96 rounded-lg relative p-6">
-        <button onClick={onClose} className="absolute top-2 right-2 z-10"><X/></button>
+        <button onClick={onClose} className="absolute top-2 right-2 z-10">
+          <X />
+        </button>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onClick)} className="space-y-6">
             <FormField
@@ -120,7 +150,10 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
                 <FormItem>
                   <FormLabel>Bounty Description</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Enter bounty description" {...field} />
+                    <Textarea
+                      placeholder="Enter bounty description"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -133,7 +166,11 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
                 <FormItem>
                   <FormLabel>Bounty Payout</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="Enter bounty payout" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="Enter bounty payout"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -152,10 +189,16 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
                 </FormItem>
               )}
             />
+<<<<<<< HEAD:src/components/createbountyformmodal.tsx
             <Button type="submit" className="w-full" onClick={() => onClick(form.getValues("description"), form.getValues("longitude"), form.getValues("latitude"), form.getValues("payout"))}>Submit</Button>
+=======
+            <Button type="submit" className="w-full">
+              Submit
+            </Button>
+>>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
           </form>
         </Form>
       </div>
     </div>
-  )
+  );
 }

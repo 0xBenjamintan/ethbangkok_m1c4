@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { create } from "ipfs-http-client"
 import { useState } from "react"
+<<<<<<< HEAD:src/components/bountyformmodal.tsx
 import {lineaSepolia} from "thirdweb/chains";
+=======
+>>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/bountyformmodal.tsx
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -16,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+<<<<<<< HEAD:src/components/bountyformmodal.tsx
 import { X , CircleDollarSign, LucidePanelBottomDashed} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
@@ -32,6 +36,11 @@ const contract = getContract({
   address: "0x5E662A0CbCe4F40701C74735Af020ce04331e839",
   chain: lineaSepolia,
 });
+=======
+import { X , CircleDollarSign} from "lucide-react"
+import BountyList from "@/components/modal/bountylist"
+import Bounty from "@/components/modal/bountylist";
+>>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/bountyformmodal.tsx
 
 
 const formSchema = z.object({
@@ -40,6 +49,13 @@ const formSchema = z.object({
   }),
   photo: z.any().optional(),
 })
+
+interface Bounty {
+  title: string;
+  location: { lat: number; long: number };
+  description: string;
+  payout: number;
+}
 
 interface FormModalProps {
   onClose: () => void;
