@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Encode+Sans:wdth,wght@75..125,100..900&display=swap');
+
 :root {
 	line-height: 1.5;
 	font-weight: 400;
