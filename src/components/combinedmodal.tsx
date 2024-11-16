@@ -6,6 +6,7 @@ import { Button } from "./ui/button";
 import BountyList from './bountylist';
 import { ContributionFormModal } from './contributionformmodal';
 import { CreateBountyFormModal } from './createbountyformmodal';
+import Image from 'next/image';
 
 interface CombinedModalProps {
     onClose: () => void;
@@ -39,25 +40,43 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
             <div className="w-64 h-64 flex flex-row justify-center items-center space-x-4 bg-white p-6 rounded-md shadow-lg">
                 {/* Bounty Application Section */}
                 <div className="mb-4 flex flex-col justify-center items-center">
-                    <Scroll size={'44px'} />
-                    <h2 className="text-lg font-semibold">Apply for Bounty!</h2>
-                    <Button onClick={handleBountyClick}>Apply for Bounty!</Button>
+                    <Image
+                    className="mr-4 my-auto"
+                    src="/road.png"
+                    alt="Apply Bounty"
+                    width={70}
+                    height={70}
+                    />
+                    <h2 className="text-lg font-semibold">Apply for Bounty !</h2>
+                    <Button onClick={handleBountyClick}>Apply for Bounty !</Button>
                 </div>
             </div>
             <div className="w-64 h-64 flex flex-row justify-center items-center space-x-4 bg-white p-6 rounded-md shadow-lg">
                 {/* Anonymous Photo Contribution Section */}
                 <div className="mb-4 flex flex-col justify-center items-center text-center">
-                    <Upload size={'44px'} />
-                    <h2 className="text-lg font-semibold">Contribute a Photo of Your Place!</h2>
-                    <Button onClick={handleContributionClick}>Contribute a Photo!</Button>
+                    <Image
+                    className="mr-4 my-auto"
+                    src="/camera.png"
+                    alt="Contribution"
+                    width={70}
+                    height={70}
+                    />
+                    <h2 className="text-lg font-semibold">Contribute a Photo of Your Place !</h2>
+                    <Button onClick={handleContributionClick}>Contribute a Photo !</Button>
                 </div>
             </div>
             <div className="w-64 h-64 flex flex-row justify-center items-center space-x-4 bg-white p-6 rounded-md shadow-lg">
                 {/* Create Bounty Section */}
                 <div className="mb-4 flex flex-col justify-center items-center text-center">
-                    <Upload size={'44px'} />
-                    <h2 className="text-lg font-semibold">Create a Bounty!</h2>
-                    <Button onClick={handleCreateBountyClick}>Create Bounty!</Button>
+                    <Image
+                    className="mr-4 my-auto"
+                    src="/earth.png"
+                    alt="Create Bounty"
+                    width={70}
+                    height={70}
+                    />
+                    <h2 className="text-lg font-semibold">Create a Bounty !</h2>
+                    <Button onClick={handleCreateBountyClick}>Create Bounty !</Button>
                 </div>
             </div>
             {isBountyVisible && (
