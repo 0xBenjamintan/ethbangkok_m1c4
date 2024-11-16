@@ -9,11 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-popover": "^1.1.2",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@thirdweb-dev/react": "^4.9.4",
+    "@types/leaflet": "^1.9.14",
+    "@worldcoin/idkit": "^1.3.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
     "ethbkk": "file:",
+    "framer-motion": "^11.11.17",
+    "ipfs-http-client": "^60.0.1",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.459.0",
     "next": "14.1.0",
     "react": "^18.3",
     "react-dom": "^18.3",
-    "thirdweb": "^5"
+    "react-toastify": "^10.0.6",
+    "react-hook-form": "^7.53.2",
+    "tailwind-merge": "^2.5.4",
+    "tailwindcss-animate": "^1.0.7",
+    "thirdweb": "^5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
