@@ -1,6 +1,6 @@
 'use client'
 
-import Map from "./map"
+import Map from "./Map"
 
 
 export default function MainPage() {
