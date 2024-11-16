@@ -8,10 +8,14 @@ import { useState } from "react";
 
 export default function MainComponent() {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
+
   return (
     <div>
       <Navbar
         setWalletConnected={setIsWalletConnected}
+        setIsVerified={setIsVerified}
+        isVerified={isVerified}
       />
       { isWalletConnected ? <MainPage /> : <LandingPage />}
       <Footer />

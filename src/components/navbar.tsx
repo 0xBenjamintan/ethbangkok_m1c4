@@ -12,18 +12,16 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 
-export default function Navbar({ setWalletConnected }: { setWalletConnected: (connected: boolean) => void }) {
+export default function Header({ setWalletConnected, setIsVerified, isVerified }: { setWalletConnected: (connected: boolean) => void, setIsVerified: (verified: boolean) => void, isVerified: boolean }) {
   const wallets = [
     createWallet("io.metamask"),
     createWallet("com.coinbase.wallet"),
   ];
 
-  const [isVerified, setIsVerified] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleVerify = async (proof: ISuccessResult) => {
     const response = await fetch("/api/verify", {
-      // route to your backend will depend on implementation
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +54,7 @@ export default function Navbar({ setWalletConnected }: { setWalletConnected: (co
 
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center">
-      <Link className="flex items-center justify-center py-2" href="#">
+      <Link className="flex items-center justify-center py-2" href="/">
         <Image
           className=" "
           src="/logo.png"

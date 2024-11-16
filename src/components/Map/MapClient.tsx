@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Map as LeafletMap, LeafletMouseEvent } from 'leaflet';
-import { Button } from '../ui/button';
 
 interface Landmark {
   name: string;
@@ -103,7 +102,7 @@ const MapClient = () => {
         .bindPopup(`
             <b>${landmark.name}</b><br>
             ${landmark.coords}<br>
-            <button onclick=window.location.href='/bounty'>Apply</button>
+            <button onclick=window.location.href='/bounty'><a>Apply</a></button>
           `);
           
       landmarkMarker.setOpacity(0.8);
