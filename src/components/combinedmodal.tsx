@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Scroll, Upload, X } from "lucide-react";
 import { Button } from "./ui/button";
 import BountyList from './bountylist';
+import { ContributionFormModal } from './contributionformmodal';
 
 interface CombinedModalProps {
     onClose: () => void;
@@ -11,6 +12,11 @@ interface CombinedModalProps {
 
 export default function CombinedModal({ onClose }: CombinedModalProps) {
     const [isBountyVisible, setBountyVisible] = useState(false);
+    const [isContributionVisible, setContributionVisible] =useState(false);
+
+    const handleContributionClick = () => {
+        setContributionVisible(true)
+    }
 
     const handleBountyClick = () => {
         setBountyVisible(true);
@@ -18,6 +24,7 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
 
     const handleClose = () => {
         setBountyVisible(false);
+        setContributionVisible(false)
     };
 
     return (
@@ -35,7 +42,7 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
                 <div className="mb-4 flex flex-col justify-center items-center text-center">
                     <Upload size={'44px'} />
                     <h2 className="text-lg font-semibold">Contribute a Photo of Your Place!</h2>
-                    <Button>Contribute a Photo!</Button>
+                    <Button onClick={handleContributionClick}>Contribute a Photo!</Button>
                 </div>
             </div>
             {isBountyVisible && (
@@ -43,6 +50,12 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
                     <BountyList onClose={handleClose} />
                 </div>
             )}
+            {isContributionVisible && (
+                <div className="fixed inset-0 flex items-center justify-center z-[2000] bg-black bg-opacity-50">
+                    <ContributionFormModal onClose={handleClose} />
+                </div>
+            )}
+
             <button onClick={onClose} className="absolute top-2 right-2">
                 <X size={44} />
             </button>

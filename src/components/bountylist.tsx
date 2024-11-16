@@ -5,10 +5,10 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { MapPin, DollarSign, ChevronDown, ChevronUp, X } from "lucide-react"
 import { Button } from './ui/button'
-import { FormModal } from './formmodal'
+import { FormModal } from './bountyformmodal'
 
 interface Bounty {
-  id: string
+  id: string    
   title: string
   description: string
   payout: number
