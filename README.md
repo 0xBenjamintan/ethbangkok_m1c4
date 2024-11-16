@@ -2,90 +2,54 @@
 ## 👀What is MAP Mak Mak
 MAP Mak Mak is a decentralized platform designed to enhance public goods through incentivized mapping. It addresses accuracy location data, updated location information. 
 
-## Product Description
+## Product Description 
 ### Problem Statement ⁉️
-
+Existing mapping public goods ecosystem faces key challenges. These issues hinder the accessibility, fairness, and accuracy of mapping data globally:
+1. Inaccurate Lifetime Data
+2. Lack of Incentives for Contributors
+3. Privacy and Trust Concern
 
 ### 👁️Vision
+Map Mak Mak aims to build a collaborative mapping platform that empowers users to share valuable location insights and experiences, creating a more connected, equitable, and dynamic mapping ecosystem.
 
 ### 📍Unique Value Proposition
+Empowers users to contribute diverse, real-time location insights and experiences, rewarding them for shaping a more dynamic and equitable map.
 
 ## ⛓️‍💥How it's Made
+Users get to contribute diverse location insights, earn rewards, and shape a dynamic, equitable map through interactive, real-time engagement.
 
 ## The Stack
 1. Frontend - Nextjs, Tailwindcss, Noun UI Kit, Magic UI, and shadcn
 2. Web3 Development - Solidity, ThirdWeb, WorldID
 
 ## Contract Address
-### Linea
+### 1. Linea Sepolia
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-### Morph
+### 2. Mantle Sepolia
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-### Zircuit
+### 3. Zircuit Testnet
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-### Celo
+### 4 Scroll Sepolia
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-### Hedera
+### 5 Celo Alfajores
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-### Scroll
+### 6 Polygon PoS Amoy Testnet
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-### Oasis Protocol
+### 7 Oasis Sapphire Testner
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-![tw-banner](https://github.com/thirdweb-example/next-starter/assets/57885104/20c8ce3b-4e55-4f10-ae03-2fe4743a5ee8)
+### 8 Hedera Testnet
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-# thirdweb-next-starter
+### 9 Morph Holesky Testnet
+[Contract Address](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-Starter template to build an onchain react native app with [thirdweb](https://thirdweb.com/) and [next](https://nextjs.org/).
+### 10 Rootstock Testnet
+[Rootstock Testnet](0x5E662A0CbCe4F40701C74735Af020ce04331e839)
 
-## Installation
-
-Install the template using [thirdweb create](https://portal.thirdweb.com/cli/create)
-
-```bash
-  npx thirdweb create app --next
-```
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file:
-
-`CLIENT_ID`
-
-To learn how to create a client ID, refer to the [client documentation](https://portal.thirdweb.com/typescript/v5/client). 
-
-## Run locally
-
-Install dependencies
-
-```bash
-yarn
-```
-
-Start development server
-
-```bash
-yarn dev
-```
-
-Create a production build
-
-```bash
-yarn build
-```
-
-Preview the production build
-
-```bash
-yarn start
-```
-
-## Resources
-
-- [Documentation](https://portal.thirdweb.com/typescript/v5)
-- [Templates](https://thirdweb.com/templates)
-- [YouTube](https://www.youtube.com/c/thirdweb)
-- [Blog](https://blog.thirdweb.com)
-
-## Need help?
-
-For help or feedback, please [visit our support site](https://thirdweb.com/support)
