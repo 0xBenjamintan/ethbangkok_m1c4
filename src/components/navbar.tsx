@@ -56,7 +56,7 @@ export default function Header() {
   };
 
   return (
-    <header className="px-4 lg:px-6 h-14 flex items-center font-londrina bg-[#FFFBE7]">
+    <header className="px-4 lg:px-6 h-14 flex items-center font-londrina bg-[#FDEFB4]">
       <Link className="flex items-center justify-center py-2" href="/">
         <Image src="/logo.png" alt="Map Mak Mak logo" width={70} height={70} />
       </Link>

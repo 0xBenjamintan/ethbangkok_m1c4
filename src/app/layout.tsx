@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="en" className="font-londrina bg-[#FFFBE7]">
+      <html lang="en" className="font-londrina bg-[#FDEFB4]">
         <head>
           <link
             rel="stylesheet"
@@ -33,7 +33,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <ThirdwebProvider>
             <Header />
-            <div className="font-londrina bg-[#FFFBE7]">{children}</div>
+            <div className="font-londrina bg-[#FDEFB4]">{children}</div>
             <BottomNavigation />
           </ThirdwebProvider>
         </body>
