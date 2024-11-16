@@ -13,7 +13,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-<<<<<<< HEAD:src/components/createbountyformmodal.tsx
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { X , CircleDollarSign} from "lucide-react"
@@ -23,6 +22,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { prepareContractCall, getContract, createThirdwebClient } from "thirdweb";
 import { useSendTransaction } from "thirdweb/react";
 import { lineaSepolia } from "thirdweb/chains"
+import { create } from "domain";
 
 const client = createThirdwebClient({ clientId: "4dfc4535b9ea8bc0b4ba0ee7ae30ce68" });
 const contract = getContract({
@@ -32,14 +32,6 @@ const contract = getContract({
 });
 
 
-=======
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { X, CircleDollarSign } from "lucide-react";
-import BountyList from "./bountylist";
-import Bounty from "./bountylist";
-import { Textarea } from "@/components/ui/textarea";
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
 
 const formSchema = z.object({
   walletAddress: z.string().min(2, {
@@ -68,10 +60,9 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
   );
   const [userLocation, setUserLocation] = useState<string | null>(null);
 
-<<<<<<< HEAD:src/components/createbountyformmodal.tsx
   const { mutate: sendTransaction } = useSendTransaction();
 
-  const onClick = (description: string, longitude: string, latitude: string, payoutAmount: number) => {
+  const createBounty = (description: string, longitude: string, latitude: string, payoutAmount: number) => {
     const transaction = prepareContractCall({
       contract,
       method:
@@ -86,16 +77,10 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
     sendTransaction(transaction);
   };
 
-=======
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
-<<<<<<< HEAD:src/components/createbountyformmodal.tsx
-  
-
-=======
   const onSubmit = async (data: any) => {
     console.log(data); // Handle form submission
   };
@@ -107,7 +92,6 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
     console.log(lat, lng, address);
     setValue("location", `${lat}, ${lng}`);
   };
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -116,7 +100,7 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
           <X />
         </button>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onClick)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(createBounty)} className="space-y-6">
             <FormField
               control={form.control}
               name="walletAddress"
@@ -189,13 +173,7 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
                 </FormItem>
               )}
             />
-<<<<<<< HEAD:src/components/createbountyformmodal.tsx
-            <Button type="submit" className="w-full" onClick={() => onClick(form.getValues("description"), form.getValues("longitude"), form.getValues("latitude"), form.getValues("payout"))}>Submit</Button>
-=======
-            <Button type="submit" className="w-full">
-              Submit
-            </Button>
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/createbountyformmodal.tsx
+            <Button type="submit" className="w-full" onClick={() => createBounty(form.getValues("description"), form.getValues("longitude"), form.getValues("latitude"), form.getValues("payout"))}>Submit</Button>
           </form>
         </Form>
       </div>

@@ -20,21 +20,6 @@ import { X, CircleDollarSign } from "lucide-react";
 import BountyList from "@/components/modal/bountylist";
 import Bounty from "@/components/modal/bountylist";
 
-<<<<<<< HEAD:src/components/contributionformmodal.tsx
-=======
-// Set up the IPFS client
-const client = create({
-  url: "https://ipfs.infura.io:5001/api/v0",
-  headers: {
-    authorization:
-      "Basic " +
-      btoa(
-        "c10166f1ca144e2abcb22a8eb4c33a91:/csukZmw4j4NGaM++Kp+xzhuquxvb2ljgNv5pVyOpzsb+TquVZfDVQ"
-      ), // Add your project ID and secret
-  },
-});
-
->>>>>>> 4d28182a7875818ab82b8a03a01fc520109de784:src/components/modal/contributionformmodal.tsx
 const formSchema = z.object({
   walletAddress: z.string().min(2, {
     message: "Wallet address must be at least 2 characters.",
@@ -71,9 +56,9 @@ export function ContributionFormModal({ onClose }: FormModalProps) {
     resolver: zodResolver(formSchema),
   });
 
-  const onsubmit = () => [
-    
-  ]
+  const onSubmit = () => {
+    console.log("Success")
+  }
 
 
   return (
