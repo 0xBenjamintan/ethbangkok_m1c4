@@ -20,14 +20,6 @@ import { X , CircleDollarSign} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
 
-// Set up the IPFS client
-const client = create({
-  url: "https://ipfs.infura.io:5001/api/v0",
-  headers: {
-    authorization: 'Basic ' + btoa('c10166f1ca144e2abcb22a8eb4c33a91:/csukZmw4j4NGaM++Kp+xzhuquxvb2ljgNv5pVyOpzsb+TquVZfDVQ'), // Add your project ID and secret
-  },
-})
-
 const formSchema = z.object({
   walletAddress: z.string().min(2, {
     message: "Wallet address must be at least 2 characters.",
@@ -62,21 +54,10 @@ export function ContributionFormModal({ onClose }: FormModalProps) {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    try {
-      if (data.photo && data.photo[0]) {
-        // Upload to IPFS
-        const file = data.photo[0];
-        const added = await client.add(file);
-        setUploadedPhotoHash(added.path); // Save IPFS hash
-        console.log("Uploaded photo to IPFS:", added.path);
-      }
+  const onsubmit = () => [
+    
+  ]
 
-      console.log(data); // Handle form submission
-    } catch (error) {
-      console.error("Error uploading to IPFS:", error);
-    }
-  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

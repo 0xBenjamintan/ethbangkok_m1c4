@@ -19,6 +19,16 @@ import { X , CircleDollarSign} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
 import { Textarea } from "@/components/ui/textarea"
+import { prepareContractCall, getContract, createThirdwebClient } from "thirdweb";
+import { useSendTransaction } from "thirdweb/react";
+import { lineaSepolia } from "thirdweb/chains"
+
+const client = createThirdwebClient({ clientId: "4dfc4535b9ea8bc0b4ba0ee7ae30ce68" });
+const contract = getContract({
+  client,
+  address: "0x5E662A0CbCe4F40701C74735Af020ce04331e839",
+  chain: lineaSepolia,
+});
 
 
 
@@ -47,23 +57,36 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
   const [uploadedPhotoHash, setUploadedPhotoHash] = useState<string | null>(null);
   const [userLocation, setUserLocation] = useState<string | null>(null);
 
+  const { mutate: sendTransaction } = useSendTransaction();
+
+  const onClick = (description: string, longitude: string, latitude: string, payoutAmount: number) => {
+    const transaction = prepareContractCall({
+      contract,
+      method:
+        "function createBounty(string _description, string _longitude, string _latitude, uint256 _payoutAmount)",
+      params: [
+        description,
+        longitude,
+        latitude,
+        BigInt(payoutAmount),
+      ],
+    });
+    sendTransaction(transaction);
+  };
 
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    
+  
 
-      console.log(data); // Handle form submission
-  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white w-96 rounded-lg relative p-6">
         <button onClick={onClose} className="absolute top-2 right-2 z-10"><X/></button>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onClick)} className="space-y-6">
             <FormField
               control={form.control}
               name="walletAddress"
@@ -129,7 +152,7 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">Submit</Button>
+            <Button type="submit" className="w-full" onClick={() => onClick(form.getValues("description"), form.getValues("longitude"), form.getValues("latitude"), form.getValues("payout"))}>Submit</Button>
           </form>
         </Form>
       </div>
