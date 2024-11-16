@@ -124,7 +124,7 @@ const menus = [
 const BottomNavigation = () => {
   const [currentTab, setCurrentTab] = useState<number>(1);
   return (
-    <div className="fixed bottom-0 z-[1000] flex h-[64px] w-full justify-around bg-[#FFFBE7] px-2 py-[10px] text-black lg:hidden">
+    <div className="fixed bottom-0 z-[1000] flex h-[64px] w-full justify-around bg-[#FDEFB4] px-2 py-[10px] text-black lg:hidden">
       {menus.map((item) => (
         <Link
           href={item.href}

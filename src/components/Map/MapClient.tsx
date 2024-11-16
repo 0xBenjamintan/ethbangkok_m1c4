@@ -59,8 +59,8 @@ const MapClient = () => {
               className: "current-location-marker",
               html: `
                 <div class="relative">
-                  <div class="absolute w-4 h-4 bg-blue-500 rounded-full"></div>
-                  <div class="absolute w-8 h-8 bg-blue-500 rounded-full opacity-30 animate-ping"></div>
+                  <div class="absolute w-4 h-4 bg-[#1929F4] rounded-full"></div>
+                  <div class="absolute w-8 h-8 bg-[#1929F4] rounded-full opacity-30 animate-ping"></div>
                 </div>
               `,
               iconSize: [32, 32],
@@ -163,14 +163,14 @@ const MapClient = () => {
 
   return (
     <div className="relative w-full">
-      <div className="p-4 mb-4 flex flex-col sm:flex-row justify-between items-center bg-[#FFFBE7]">
+      <div className="p-4 mb-4 flex flex-col sm:flex-row justify-between items-center bg-[#FDEFB4]">
         <span className="text-center sm:text-left">
           Click the marker to check the bounty details. Click Apply to apply for
           the selected bounty.
         </span>
         <button
           onClick={getCurrentLocation}
-          className="mt-2 sm:mt-0 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          className="mt-2 sm:mt-0 px-4 py-2 bg-[#1929F4] text-white rounded-md hover:bg-[0343DF] transition-colors"
         >
           Center on My Location
         </button>
@@ -189,7 +189,7 @@ const MapClient = () => {
       </div>
       <button
         onClick={toggleModals}
-        className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-blue-500 z-[1000] text-white flex items-center justify-center shadow-lg"
+        className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-[#1929F4] z-[1000] text-white flex items-center justify-center shadow-lg"
       >
         <Plus size={44} />
       </button>
