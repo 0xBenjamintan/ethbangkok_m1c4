@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import { X , CircleDollarSign} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
+import { Textarea } from "@/components/ui/textarea"
 
 
 
@@ -25,6 +26,16 @@ const formSchema = z.object({
   walletAddress: z.string().min(2, {
     message: "Wallet address must be at least 2 characters.",
   }),
+  title: z.string().min(1, {
+    message: "Bounty title is required.",
+  }),
+  description: z.string().min(1, {
+    message: "Bounty description is required.",
+  }),
+  payout: z.number().positive({
+    message: "Bounty payout must be a positive number.",
+  }),
+  location: z.string().optional(),
   photo: z.any().optional(),
 })
 
@@ -36,20 +47,6 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
   const [uploadedPhotoHash, setUploadedPhotoHash] = useState<string | null>(null);
   const [userLocation, setUserLocation] = useState<string | null>(null);
 
-  const getUserLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation(`Latitude: ${latitude}, Longitude: ${longitude}`);
-      });
-    } else {
-      setUserLocation("Geolocation is not supported by this browser.");
-    }
-  };
-
-  useEffect(() => {
-    getUserLocation();
-  }, []);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -65,7 +62,6 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white w-96 rounded-lg relative p-6">
         <button onClick={onClose} className="absolute top-2 right-2 z-10"><X/></button>
-        {userLocation && <p className="text-center mb-4">{userLocation}</p>}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -76,6 +72,58 @@ export function CreateBountyFormModal({ onClose }: FormModalProps) {
                   <FormLabel>Wallet Address</FormLabel>
                   <FormControl>
                     <Input placeholder="0x9.......099D" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bounty Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter bounty title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bounty Description</FormLabel>
+                  <FormControl>
+                    <Textarea placeholder="Enter bounty description" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="payout"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Bounty Payout</FormLabel>
+                  <FormControl>
+                    <Input type="number" placeholder="Enter bounty payout" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="location"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Location</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter location" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
