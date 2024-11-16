@@ -5,17 +5,16 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { useState } from "react";
 import { useAuth } from "@/components/provider/AuthContext";
-
+import BottomNavigation from "@/components/bottom-navigation/bottom-navigation";
 
 export default function MainComponent() {
-  const { isWalletConnected, isVerified } = useAuth();
+  const { isVerified } = useAuth();
 
   return (
     <div>
-      <Navbar
-      />
-      {isWalletConnected ? <MainPage /> : <LandingPage />}
+      {isVerified ? <MainPage /> : <LandingPage />}
       <Footer />
+      <BottomNavigation />
     </div>
   );
 }

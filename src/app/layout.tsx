@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThirdwebProvider } from "thirdweb/react";
 import Header from "@/components/navbar";
 import { AuthProvider } from "@/components/provider/AuthContext";
+import BottomNavigation from "@/components/bottom-navigation/bottom-navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <AuthProvider>
-      <html lang="en">
+      <html lang="en" className="font-londrina bg-[#FFFBE7]">
         <head>
           <link
             rel="stylesheet"
@@ -31,7 +32,9 @@ export default function RootLayout({
         </head>
         <body className={inter.className}>
           <ThirdwebProvider>
-            <div className="font-encode bg-[#FFFBE7]">{children}</div>
+            <Header />
+            <div className="font-londrina bg-[#FFFBE7]">{children}</div>
+            <BottomNavigation />
           </ThirdwebProvider>
         </body>
       </html>
