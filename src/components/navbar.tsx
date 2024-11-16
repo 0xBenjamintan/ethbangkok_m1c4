@@ -1,56 +1,64 @@
-import { ArrowRight, CheckCircle, Code, Laptop, Zap } from 'lucide-react'
-import Link from "next/link"
-import { ConnectButton } from "thirdweb/react"
-import { client } from "@/app/client"
-import { createWallet } from "thirdweb/wallets"
-import { lightTheme } from "thirdweb/react"
-import { IDKitWidget, VerificationLevel, ISuccessResult } from '@worldcoin/idkit'
-import Image from 'next/image'
-import { useState } from 'react'
+import { ArrowRight, CheckCircle, Code, Laptop, Zap } from "lucide-react";
+import Link from "next/link";
+import { ConnectButton } from "thirdweb/react";
+import { client } from "@/app/client";
+import { createWallet } from "thirdweb/wallets";
+import { lightTheme } from "thirdweb/react";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover"
+  IDKitWidget,
+  VerificationLevel,
+  ISuccessResult,
+} from "@worldcoin/idkit";
+import Image from "next/image";
+import { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ setWalletConnected }: { setWalletConnected: (connected: boolean) => void }) {
   const wallets = [
     createWallet("io.metamask"),
     createWallet("com.coinbase.wallet"),
-  ]
+  ];
 
-  const [isVerified, setIsVerified] = useState(false)
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+  const [isVerified, setIsVerified] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleVerify = async (proof: ISuccessResult) => {
     const response = await fetch("/api/verify", {
+      // route to your backend will depend on implementation
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(proof),
-    })
+    });
     if (response.ok) {
-      console.log("Success")
+      console.log("Success");
     } else {
-      console.log("Verified fail")
+      console.log("Verified fail");
     }
-  }
+  };
 
   const onSuccess = () => {
-    setIsVerified(true)
-  }
+    setIsVerified(true);
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   const handleDisconnect = () => {
-    setIsVerified(false)
-    setIsPopoverOpen(false)
-  }
+    setIsVerified(false);
+    setDropdownOpen(false);
+  };
+
+  const handleWalletConnection = (connected: boolean) => {
+    setWalletConnected(connected);
+  };
 
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center">
       <Link className="flex items-center justify-center py-2" href="#">
         <Image
-          className=""
+          className=" "
           src="/logo.png"
           alt="Map Mak Mak logo"
           width={70}
@@ -67,39 +75,37 @@ export default function Navbar() {
             onSuccess={onSuccess}
           >
             {({ open }) => (
-              <Popover open={isVerified && isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-                <PopoverTrigger asChild>
-                  <button
-                    onClick={() => {
-                      if (isVerified) {
-                        setIsPopoverOpen(isPopoverOpen)
-                      } else {
-                        open()
-                      }
-                    }}
-                    className="flex items-center justify-center"
-                  >
-                    <Image
-                      className="mr-4 my-auto"
-                      src="/worldcoin.png"
-                      alt="Worldcoin logo"
-                      width={20}
-                      height={20}
-                    />
-                    {isVerified ? "World ID Connected" : "Sign In with World ID"}
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className="w-48">
-                  <button
-                    onClick={handleDisconnect}
-                    className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-gray-100 rounded-md transition-colors"
-                  >
-                    Disconnect
-                  </button>
-                </PopoverContent>
-              </Popover>
+              <button
+                onClick={() => {
+                  if (isVerified) {
+                    toggleDropdown();
+                  } else {
+                    open();
+                  }
+                }}
+                className="flex align-middle justify-center"
+              >
+                <Image
+                  className="mr-4 my-auto"
+                  src="/worldcoin.png"
+                  alt="Worldcoin logo"
+                  width={20}
+                  height={20}
+                />
+                {isVerified ? "World ID Connected" : "Sign In with World ID"}
+              </button>
             )}
           </IDKitWidget>
+          {isVerified && dropdownOpen && (
+            <div className="absolute right-0 mt-4 w-48 bg-white border rounded shadow-lg">
+              <button
+                onClick={handleDisconnect}
+                className="block w-full text-left px-4 py-2 text-sm text-red-400 hover:bg-gray-100"
+              >
+                Disconnect
+              </button>
+            </div>
+          )}
         </div>
         <div>
           {isVerified && (
@@ -111,10 +117,12 @@ export default function Navbar() {
               })}
               connectModal={{ size: "compact" }}
               connectButton={{ label: "Connect Wallet" }}
+              onConnect={() => handleWalletConnection(true)}
+              onDisconnect={() => handleWalletConnection(false)}
             />
           )}
         </div>
       </nav>
     </header>
-  )
+  );
 }
