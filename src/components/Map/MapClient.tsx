@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Map as LeafletMap, LeafletMouseEvent } from 'leaflet';
+import { Plus } from 'lucide-react';
+import CombinedModal from '../combinedmodal';
 
 interface Landmark {
   name: string;
@@ -25,6 +27,7 @@ const MapClient = () => {
   const [mousePosition, setMousePosition] = useState<string>('---, ---');
   const [currentLocation, setCurrentLocation] = useState<[number, number] | null>(null);
   const [locationError, setLocationError] = useState<string>('');
+  const [areModalsOpen, setAreModalsOpen] = useState(false);
 
   const landmarks: Landmark[] = [
     { name: "Bounty 1", coords: [13.6756, 100.6059] },
@@ -74,6 +77,11 @@ const MapClient = () => {
     );
   };
 
+  // Function to toggle the combined modal
+  const toggleModals = () => {
+    setAreModalsOpen(true);
+  };
+
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
@@ -102,7 +110,7 @@ const MapClient = () => {
         .bindPopup(`
             <b>${landmark.name}</b><br>
             ${landmark.coords}<br>
-            <button onclick=window.location.href='/bounty'><a>Apply</a></button>
+            <button onclick=window.location.href='/bounty-list'><a>Apply</a></button>
           `);
           
       landmarkMarker.setOpacity(0.8);
@@ -150,7 +158,7 @@ const MapClient = () => {
   return (
     <div className="relative w-full">
       <div className="p-4 bg-gray-50 rounded-md shadow-sm mb-4 flex justify-between items-center">
-        <span>Click anywhere to add a marker. Click a marker to remove it.</span>
+        <span>Click the marker to check the bounty details. Click Apply to apply for the selected bounty.</span>
         <button 
           onClick={getCurrentLocation}
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
@@ -173,6 +181,16 @@ const MapClient = () => {
       <div className="absolute bottom-5 left-5 bg-white p-3 rounded-md shadow-md z-[1000]">
         Mouse position: {mousePosition}
       </div>
+      <button 
+        onClick={toggleModals}
+        className="absolute bottom-4 right-4 w-12 h-12 rounded-full bg-blue-500 z-[1000] text-white flex items-center justify-center shadow-lg"
+      >
+        <Plus size={44} />
+      </button>
+
+      {areModalsOpen && (
+        <CombinedModal onClose={() => setAreModalsOpen(false)} />
+      )}
 
       <style jsx global>{`
         .current-location-marker {

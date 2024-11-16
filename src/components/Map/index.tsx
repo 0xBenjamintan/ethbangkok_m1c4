@@ -1,5 +1,6 @@
 // components/Map/index.tsx
 import dynamic from 'next/dynamic';
+import { Plus } from 'lucide-react';
 
 const MapClient = dynamic(() => import('./MapClient'), {
   ssr: false,
@@ -11,5 +12,9 @@ const MapClient = dynamic(() => import('./MapClient'), {
 });
 
 export default function Map() {
-  return <MapClient />;
+  return (
+    <>
+      <MapClient />
+    </>
+  );
 }
