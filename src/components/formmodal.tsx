@@ -16,13 +16,16 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { X } from "lucide-react"
+import { X , CircleDollarSign} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
 
 // Set up the IPFS client
 const client = create({
   url: "https://ipfs.infura.io:5001/api/v0",
+  headers: {
+    authorization: 'Basic ' + btoa('c10166f1ca144e2abcb22a8eb4c33a91:/csukZmw4j4NGaM++Kp+xzhuquxvb2ljgNv5pVyOpzsb+TquVZfDVQ'), // Add your project ID and secret
+  },
 })
 
 const formSchema = z.object({
@@ -67,11 +70,11 @@ export function FormModal({ onClose, selectedBounty }: FormModalProps) {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {selectedBounty && (
-              <div>
+              <div className="flex flex-col">
                 <h3 className="text-lg font-semibold">{selectedBounty.title}</h3>
                 <p>Location: {selectedBounty.location.lat}, {selectedBounty.location.long}</p>
                 <p>{selectedBounty.description}</p>
-                <p>Payout: ${selectedBounty.payout}</p>
+                <p> Payout:  {selectedBounty.payout} USDC</p>
               </div>
             )}
             <FormField

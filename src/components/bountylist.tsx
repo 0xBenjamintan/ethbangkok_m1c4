@@ -24,7 +24,7 @@ interface BountyListProps {
 
 export default function BountyList({ onClose }: BountyListProps) {
   const bounties: Bounty[] = [
-    { id: '1', title: 'Bounty 1', description: 'Description 1', payout: 100, location: { lat: 34.0522, long: -118.2437 } },
+    { id: '1', title: 'Bounty 1', description: 'I want to know the traffic condition on this location', payout: 100, location: { lat: 34.0522, long: -118.2437 } },
     { id: '2', title: 'Bounty 2', description: 'Description 2', payout: 200, location: { lat: 40.7128, long: -74.0060 } },
   ]
 
@@ -59,8 +59,7 @@ export default function BountyList({ onClose }: BountyListProps) {
                       <div>
                       <h3 className="text-lg font-semibold">{bounty.title}</h3>
                       <Badge variant="secondary" className="mt-1">
-                          <DollarSign className="w-3 h-3 mr-1" />
-                          ${bounty.payout}
+                          {bounty.payout} USDC
                       </Badge>
                       </div>
                   </div>
@@ -74,7 +73,7 @@ export default function BountyList({ onClose }: BountyListProps) {
                   {expandedBountyId === bounty.id && (
                   <div className="px-4 pb-4 pt-2 border-t">
                       <p className="text-gray-600 mb-4">{bounty.description}</p>
-                      <div className="flex items-center text-sm text-gray-500">
+                      <div className="flex items-center mb-4 text-sm text-gray-500">
                       <MapPin className="w-4 h-4 mr-1" />
                       <span>
                           {bounty.location.lat.toFixed(4)}, {bounty.location.long.toFixed(4)}
