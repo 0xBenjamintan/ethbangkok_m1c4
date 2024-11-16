@@ -23,7 +23,7 @@ export default function LandingPage() {
                   Welcome to Map Mak Mak
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  A decentralized ,
+                  A decentralized
                 </p>
               </div>
             </div>
