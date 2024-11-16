@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { create } from "ipfs-http-client"
 import { useState } from "react"
-
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -17,8 +16,8 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { X , CircleDollarSign} from "lucide-react"
-import BountyList from "./bountylist"
-import Bounty from './bountylist'
+import BountyList from "@/components/modal/bountylist"
+import Bounty from "@/components/modal/bountylist";
 
 // Set up the IPFS client
 const client = create({
@@ -34,6 +33,13 @@ const formSchema = z.object({
   }),
   photo: z.any().optional(),
 })
+
+interface Bounty {
+  title: string;
+  location: { lat: number; long: number };
+  description: string;
+  payout: number;
+}
 
 interface FormModalProps {
   onClose: () => void;

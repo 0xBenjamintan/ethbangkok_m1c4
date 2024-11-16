@@ -5,7 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Map as LeafletMap, LeafletMouseEvent } from "leaflet";
 import { Plus } from "lucide-react";
-import CombinedModal from "../combinedmodal";
+import CombinedModal from "../modal/combinedmodal";
 
 interface Landmark {
   name: string;
@@ -51,7 +51,8 @@ const MapClient = () => {
 
         // If map exists, pan to current location
         if (map) {
-          map.setView([latitude, longitude], 15);
+          const zoomLevel = 15;
+          map.setView([latitude, longitude], zoomLevel);
 
           // Add a special marker for current location
           const currentLocationMarker = L.marker([latitude, longitude], {
@@ -119,32 +120,6 @@ const MapClient = () => {
 
       landmarkMarker.setOpacity(0.8);
     });
-
-    // // Add click handler for new markers
-    // mapInstance.on('click', (e: LeafletMouseEvent) => {
-    //   const newMarker = L.marker(e.latlng).addTo(mapInstance);
-
-    //   const markerId = `marker-${Date.now()}`;
-    //   newMarker.bindPopup(`
-    //     <b>Custom Marker</b><br>
-    //     Latitude: ${e.latlng.lat.toFixed(4)}<br>
-    //     Longitude: ${e.latlng.lng.toFixed(4)}<br>
-    //     <small>Click marker to remove</small>
-    //   `);
-
-    //   newMarker.on('click', () => {
-    //     mapInstance.removeLayer(newMarker);
-    //     setMarkers(prev => prev.filter(m => m.id !== markerId));
-    //   });
-
-    //   setMarkers(prev => [...prev, {
-    //     id: markerId,
-    //     position: {
-    //       lat: e.latlng.lat,
-    //       lng: e.latlng.lng
-    //     }
-    //   }]);
-    // });
 
     // Add mousemove handler
     mapInstance.on("mousemove", (e: LeafletMouseEvent) => {
