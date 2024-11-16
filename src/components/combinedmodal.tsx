@@ -5,6 +5,7 @@ import { Scroll, Upload, X } from "lucide-react";
 import { Button } from "./ui/button";
 import BountyList from './bountylist';
 import { ContributionFormModal } from './contributionformmodal';
+import { CreateBountyFormModal } from './createbountyformmodal';
 
 interface CombinedModalProps {
     onClose: () => void;
@@ -13,6 +14,7 @@ interface CombinedModalProps {
 export default function CombinedModal({ onClose }: CombinedModalProps) {
     const [isBountyVisible, setBountyVisible] = useState(false);
     const [isContributionVisible, setContributionVisible] =useState(false);
+    const [isCreateBountyVisible, setCreateBountyVisible] =useState(false);
 
     const handleContributionClick = () => {
         setContributionVisible(true)
@@ -22,9 +24,14 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
         setBountyVisible(true);
     };
 
+    const handleCreateBountyClick = () => {
+        setCreateBountyVisible(true);
+    }
+
     const handleClose = () => {
         setBountyVisible(false);
         setContributionVisible(false)
+        setCreateBountyVisible(false)
     };
 
     return (
@@ -45,6 +52,14 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
                     <Button onClick={handleContributionClick}>Contribute a Photo!</Button>
                 </div>
             </div>
+            <div className="w-64 h-64 flex flex-row justify-center items-center space-x-4 bg-white p-6 rounded-md shadow-lg">
+                {/* Create Bounty Section */}
+                <div className="mb-4 flex flex-col justify-center items-center text-center">
+                    <Upload size={'44px'} />
+                    <h2 className="text-lg font-semibold">Create a Bounty!</h2>
+                    <Button onClick={handleCreateBountyClick}>Create Bounty!</Button>
+                </div>
+            </div>
             {isBountyVisible && (
                 <div className="fixed inset-0 flex items-center justify-center z-[2000] bg-black bg-opacity-50">
                     <BountyList onClose={handleClose} />
@@ -53,6 +68,11 @@ export default function CombinedModal({ onClose }: CombinedModalProps) {
             {isContributionVisible && (
                 <div className="fixed inset-0 flex items-center justify-center z-[2000] bg-black bg-opacity-50">
                     <ContributionFormModal onClose={handleClose} />
+                </div>
+            )}
+            {isCreateBountyVisible && (
+                <div className="fixed inset-0 flex items-center justify-center z-[2000] bg-black bg-opacity-50">
+                    <CreateBountyFormModal onClose={handleClose} />
                 </div>
             )}
 
