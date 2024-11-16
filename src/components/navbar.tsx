@@ -63,7 +63,7 @@ export default function Navbar() {
         <nav className="ml-auto flex gap-4 sm:gap-6">
           <div className="space-x-4 relative flex items-center">
             <IDKitWidget
-              app_id="app_staging_4bc5c0ed5028af87bab15fac0432420c"
+              app_id="app_899ff65b12471d92edc6c4272a566ba1"
               action="verify"
               verification_level={VerificationLevel.Device}
               handleVerify={handleVerify}
