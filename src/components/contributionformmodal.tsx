@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { create } from "ipfs-http-client"
 import { useState, useEffect } from "react"
-
+import { toast, Bounce, ToastContainer } from "react-toastify"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -19,14 +19,6 @@ import { Input } from "@/components/ui/input"
 import { X , CircleDollarSign} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
-
-// Set up the IPFS client
-const client = create({
-  url: "https://ipfs.infura.io:5001/api/v0",
-  headers: {
-    authorization: 'Basic ' + btoa('c10166f1ca144e2abcb22a8eb4c33a91:/csukZmw4j4NGaM++Kp+xzhuquxvb2ljgNv5pVyOpzsb+TquVZfDVQ'), // Add your project ID and secret
-  },
-})
 
 const formSchema = z.object({
   walletAddress: z.string().min(2, {
@@ -62,21 +54,21 @@ export function ContributionFormModal({ onClose }: FormModalProps) {
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    try {
-      if (data.photo && data.photo[0]) {
-        // Upload to IPFS
-        const file = data.photo[0];
-        const added = await client.add(file);
-        setUploadedPhotoHash(added.path); // Save IPFS hash
-        console.log("Uploaded photo to IPFS:", added.path);
-      }
+  const onSubmit = () => {
+    console.log("Success")
+    toast('✔️ Sent Contribution!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+  }
 
-      console.log(data); // Handle form submission
-    } catch (error) {
-      console.error("Error uploading to IPFS:", error);
-    }
-  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -115,6 +107,7 @@ export function ContributionFormModal({ onClose }: FormModalProps) {
             <Button type="submit" className="w-full">Submit</Button>
           </form>
         </Form>
+        <ToastContainer/>
       </div>
     </div>
   )

@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { create } from "ipfs-http-client"
 import { useState } from "react"
+import {lineaSepolia} from "thirdweb/chains";
+import { toast, Bounce, ToastContainer } from "react-toastify";
 
 import { Button } from "@/components/ui/button"
 import {
@@ -16,17 +18,12 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { X , CircleDollarSign} from "lucide-react"
+import { X , CircleDollarSign, LucidePanelBottomDashed} from "lucide-react"
 import BountyList from "./bountylist"
 import Bounty from './bountylist'
-
-// Set up the IPFS client
-const client = create({
-  url: "https://ipfs.infura.io:5001/api/v0",
-  headers: {
-    authorization: 'Basic ' + btoa('c10166f1ca144e2abcb22a8eb4c33a91:/csukZmw4j4NGaM++Kp+xzhuquxvb2ljgNv5pVyOpzsb+TquVZfDVQ'), // Add your project ID and secret
-  },
-})
+import { prepareContractCall, getContract, createThirdwebClient } from "thirdweb";
+import { useSendTransaction } from "thirdweb/react";
+import { upload } from "thirdweb/storage";
 
 const formSchema = z.object({
   walletAddress: z.string().min(2, {
@@ -40,30 +37,32 @@ interface FormModalProps {
   selectedBounty: Bounty | null;
 }
 
+const onSubmit = (data: any) => {
+  // Handle form submission logic here
+  console.log(data);
+  toast('✔️ Bounty submitted!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Bounce,
+  });
+};
+
 export function FormModal({ onClose, selectedBounty }: FormModalProps) {
+
   const [uploadedPhotoHash, setUploadedPhotoHash] = useState<string | null>(null);
   const form = useForm({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    try {
-      if (data.photo && data.photo[0]) {
-        // Upload to IPFS
-        const file = data.photo[0];
-        const added = await client.add(file);
-        setUploadedPhotoHash(added.path); // Save IPFS hash
-        console.log("Uploaded photo to IPFS:", added.path);
-      }
-
-      console.log(data); // Handle form submission
-      console.log(selectedBounty); // Log selected bounty details
-    } catch (error) {
-      console.error("Error uploading to IPFS:", error);
-    }
-  };
 
   return (
+    <>
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white w-96 rounded-lg relative p-6">
         <button onClick={onClose} className="absolute top-2 right-2 z-10"><X/></button>
@@ -107,7 +106,9 @@ export function FormModal({ onClose, selectedBounty }: FormModalProps) {
             <Button type="submit" className="w-full">Submit</Button>
           </form>
         </Form>
+        <ToastContainer/>
       </div>
     </div>
+    </>
   )
 }
