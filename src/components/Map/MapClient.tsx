@@ -33,8 +33,6 @@ const MapClient = () => {
   const landmarks: Landmark[] = [
     { name: "Bounty 1", coords: [13.6756, 100.6059] },
     { name: "Bounty 2", coords: [13.6685, 100.5985] },
-    { name: "Statue of Liberty", coords: [40.6892, -74.0445] },
-    { name: "Times Square", coords: [40.758, -73.9855] },
   ];
 
   // Function to get current location
@@ -114,7 +112,6 @@ const MapClient = () => {
         .bindPopup(`
             <b>${landmark.name}</b><br>
             ${landmark.coords}<br>
-            <button onclick=window.location.href='/bounty-list'><a>Apply</a></button>
           `);
 
       landmarkMarker.setOpacity(0.8);
@@ -165,8 +162,7 @@ const MapClient = () => {
     <div className="relative w-full">
       <div className="p-4 mb-4 flex flex-col sm:flex-row justify-between items-center bg-[#FDEFB4]">
         <span className="text-center sm:text-left">
-          Click the marker to check the bounty details. Click Apply to apply for
-          the selected bounty.
+          Click the marker to check the bounty details.
         </span>
         <button
           onClick={getCurrentLocation}

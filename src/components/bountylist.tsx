@@ -35,23 +35,15 @@ interface BountyListProps {
 
 
 export default function BountyList({ onClose }: BountyListProps) {
-    // Move the hook call here, inside the component body
-    const { mutate: sendTransaction } = useSendTransaction();
-  
-    const applyBounty = (bounty: Bounty) => {
-      const transaction = prepareContractCall({
-        contract,
-        method: "function applyForBounty(uint256 _bountyId)",
-        params: [bounty.id],
-      });
-      sendTransaction(transaction);
-      setSelectedBounty(bounty);
+
+    const handleApplyClick = (bounty: Bounty) => {
+    setSelectedBounty(bounty);
       setIsModalOpen(true);
-    };
+    }
   
     const bounties: Bounty[] = [
-      { id: '1', title: 'Bounty 1', description: 'I want to know the traffic condition on this location', payout: 100, location: { lat: 34.0522, long: -118.2437 } },
-      { id: '2', title: 'Bounty 2', description: 'Description 2', payout: 200, location: { lat: 40.7128, long: -74.0060 } },
+      { id: '1', title: 'Bounty 1', description: 'I want to know the traffic condition on this location', payout: 100, location: { lat: 13.6756, long: 100.6059 } },
+      { id: '2', title: 'Bounty 2', description: 'I want to know the traffic condition on this location', payout: 200, location: { lat: 13.6685, long: 100.5985 } },
     ];
   
     const [expandedBountyId, setExpandedBountyId] = useState<string | null>(null);
@@ -96,7 +88,7 @@ export default function BountyList({ onClose }: BountyListProps) {
                         {bounty.location.lat.toFixed(4)}, {bounty.location.long.toFixed(4)}
                       </span>
                     </div>
-                    <Button onClick={() => applyBounty(bounty)}>Apply</Button>
+                    <Button onClick={() => handleApplyClick(bounty)}>Apply</Button>
                   </div>
                 )}
               </CardContent>

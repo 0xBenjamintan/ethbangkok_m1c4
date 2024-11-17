@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { create } from "ipfs-http-client"
 import { useState, useEffect } from "react"
-
+import { toast, Bounce, ToastContainer } from "react-toastify"
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -56,6 +56,17 @@ export function ContributionFormModal({ onClose }: FormModalProps) {
 
   const onSubmit = () => {
     console.log("Success")
+    toast('✔️ Sent Contribution!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
   }
 
 
@@ -96,6 +107,7 @@ export function ContributionFormModal({ onClose }: FormModalProps) {
             <Button type="submit" className="w-full">Submit</Button>
           </form>
         </Form>
+        <ToastContainer/>
       </div>
     </div>
   )
