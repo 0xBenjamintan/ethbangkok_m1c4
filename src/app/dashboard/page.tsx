@@ -1,31 +1,31 @@
 "use client";
 
-import { Card, CardContent } from '@/components/ui/card';
-import { useState, useEffect } from 'react';
-import { Badge, ChevronDown, ChevronUp, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-
+import { Card, CardContent } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { Badge, ChevronDown, ChevronUp, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const fetchPfpData = async () => {
   try {
-    const response = await fetch('https://api.cloudnouns.com/v1/pfp?text=badublanc.eth');
-    
+    const response = await fetch(
+      "https://api.cloudnouns.com/v1/pfp?text=badublanc.eth"
+    );
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    // Fetch SVG as text since it's an SVG image  
+    // Fetch SVG as text since it's an SVG image
     const svgData = await response.text();
     return svgData;
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
+    console.error("There was a problem with the fetch operation:", error);
     return null;
   }
 };
 
 const Dashboard = () => {
-
-  const [svgContent, setSvgContent] = useState('');
+  const [svgContent, setSvgContent] = useState("");
 
   useEffect(() => {
     const loadSvg = async () => {
@@ -37,6 +37,16 @@ const Dashboard = () => {
     loadSvg();
   }, []);
 
+  interface Bounty {
+    id: string;
+    title: string;
+    description: string;
+    payout: number;
+    location: {
+      lat: number;
+      long: number;
+    };
+  }
 
   const bounties: Bounty[] = [
     {
@@ -73,7 +83,9 @@ const Dashboard = () => {
   ];
 
   const [expandedBountyId, setExpandedBountyId] = useState<string | null>(null);
-  const [expandedWinBountyId, setExpandedWinBountyId] = useState<string | null>(null);
+  const [expandedWinBountyId, setExpandedWinBountyId] = useState<string | null>(
+    null
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBounty, setSelectedBounty] = useState<Bounty | null>(null);
 
@@ -92,12 +104,9 @@ const Dashboard = () => {
 
   return (
     <div className="text-black px-[7%] py-[5%]">
-
       <div>
         {/* Render the SVG content safely */}
-        {svgContent && (
-          <div dangerouslySetInnerHTML={{ __html: svgContent }} />
-        )}
+        {svgContent && <div dangerouslySetInnerHTML={{ __html: svgContent }} />}
       </div>
       <div>Submitted bounties</div>
       {bounties.map((bounty) => (
@@ -110,9 +119,7 @@ const Dashboard = () => {
               <div className="flex items-center space-x-4">
                 <div>
                   <h3 className="text-lg font-semibold">{bounty.title}</h3>
-                  <Badge variant="secondary" className="mt-1">
-                    {bounty.payout} USDC
-                  </Badge>
+                  <Badge className="mt-1">{bounty.payout} USDC</Badge>
                 </div>
               </div>
               {expandedBountyId === bounty.id ? (
@@ -137,7 +144,7 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       ))}
-       <div>Win&apos;s bounties</div>
+      <div>Win&apos;s bounties</div>
       {winbounties.map((bounty) => (
         <Card key={bounty.id} className="hover:shadow-lg transition-shadow">
           <CardContent className="p-0">
@@ -148,9 +155,7 @@ const Dashboard = () => {
               <div className="flex items-center space-x-4">
                 <div>
                   <h3 className="text-lg font-semibold">{bounty.title}</h3>
-                  <Badge variant="secondary" className="mt-1">s
-                    {bounty.payout} USDC
-                  </Badge>
+                  <Badge className="mt-1">{bounty.payout} USDC</Badge>
                 </div>
               </div>
               {expandedWinBountyId === bounty.id ? (
